@@ -108,7 +108,42 @@ class UserRegistrationForm(forms.ModelForm):
 
     def save(self, commit=True):
         user = super().save(commit=False)
-        user.set_password(self.cleaned_data["password1"])  # Hash the password
+        user.set_password(self.cleaned_data["password1"])
         if commit:
             user.save()
         return user
+
+
+class PasswordChangeForm(forms.Form):
+    email = forms.EmailField(
+        required=True,
+        widget=forms.EmailInput(
+            attrs={"class": "form-control", "placeholder": "Enter email"}
+        ),
+    )
+    old_password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={"class": "form-control", "placeholder": "Enter old password"}
+        ),
+        required=True,
+    )
+    new_password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={"class": "form-control", "placeholder": "Enter new password"}
+        ),
+        required=True,
+    )
+    confirm_password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={"class": "form-control", "placeholder": "Re enter new password"}
+        ),
+        required=True,
+    )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        new_password = cleaned_data.get("new_password")
+        confirm_password = cleaned_data.get("confirm_password")
+
+        if new_password != confirm_password:
+            raise forms.ValidationError("New passwords do not match")

@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from .models import ToDoModel, User
-from .forms import ToDoForm, UserLoginForm, UserRegistrationForm
+from .forms import ToDoForm, UserLoginForm, UserRegistrationForm, PasswordChangeForm
 
 User = get_user_model()
 
@@ -107,9 +107,32 @@ def resetPassword(request):
             user = User.objects.get(email=email)
             user.set_password(newPassword)
             user.save()
-            messages.success("User password updated successfully.")
             return redirect("loginUser")
         except User.DoesNotExist:
             messages.error(request, "User with the provided email does not exist")
 
     return render(request, "todos/resetPassword.html")
+
+
+def changePassword(request):
+    if request.method == "POST":
+        form = PasswordChangeForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data.get("email")
+            old_password = form.cleaned_data.get("old_password")
+            new_password = form.cleaned_data.get("new_password")
+
+            try:
+                user = User.objects.get(email=email)
+                if user.check_password(old_password):
+                    user.set_password(new_password)
+                    user.save()
+                    messages.success(request, "Password updated successfully.")
+                    return redirect("loginUser")
+                else:
+                    messages.error(request, "Old password is incorrect.")
+            except User.DoesNotExist:
+                messages.error(request, "User with the provided email does not exist.")
+    else:
+        form = PasswordChangeForm()
+    return render(request, "todos/changePassword.html", {"form": form})
