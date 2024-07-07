@@ -11,6 +11,8 @@ class ToDoForm(forms.ModelForm):
             "description",
             "priority",
             "dueDate",
+            "file",
+            "image",
         ]
 
         widgets = {
@@ -36,6 +38,16 @@ class ToDoForm(forms.ModelForm):
                 attrs={
                     "class": "form-control",
                     "placeholder": "Enter due date",
+                }
+            ),
+            "file": forms.ClearableFileInput(
+                attrs={
+                    "class": "form-control",
+                }
+            ),
+            "image": forms.ClearableFileInput(
+                attrs={
+                    "class": "form-control",
                 }
             ),
         }

@@ -12,7 +12,7 @@ User = get_user_model()
 
 @login_required
 def createTodos(request):
-    form = ToDoForm(request.POST or None)
+    form = ToDoForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         todo = form.save(commit=False)
         todo.user = request.user
@@ -53,7 +53,7 @@ def updateOne(request, pk):
         messages.error(request, "To-do not found.")
         return redirect("viewAll")
 
-    form = ToDoForm(request.POST or None, instance=todo)
+    form = ToDoForm(request.POST or None, request.FILES or None, instance=todo)
     if form.is_valid():
         try:
             form.save()

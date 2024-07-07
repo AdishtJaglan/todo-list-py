@@ -52,15 +52,26 @@
 
     <div class="container p-5 d-flex justify-content-center align-items-center">
       <div
-        class="card {% if data.priority == 'high' %} border border-danger-subtle {% elif data.priority == 'medium' %} border border-warning {% elif data.priority == 'low' %} border border-info {% endif %}"
+        class="card w-50 {% if data.priority == 'high' %} border border-danger-subtle {% elif data.priority == 'medium' %} border border-warning {% elif data.priority == 'low' %} border border-info {% endif %}"
         style="width: 18rem"
       >
+        <img
+          src="{{ data.image.url }}"
+          alt="{{ data.title }}"
+          class="card-img-top img-fluid mb-3"
+          alt="an image"
+        />
         <div class="card-body">
-          <h5 class="card-title">{{data.title}}</h5>
-          <h6 class="card-subtitle mb-2 text-body-secondary">
-            {{data.dueDate}}
-          </h6>
-          <p class="card-text">{{data.description}}</p>
+          <h5 class="card-title">{{ data.title }}</h5>
+          <p class="card-text">{{ data.description }}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{ data.dueDate }}</li>
+          <li class="list-group-item">
+            <a href="{{ data.file.url }}" class="">Download File</a>
+          </li>
+        </ul>
+        <div class="card-body">
           <a
             href="{% url 'deleteOne' data.pk %}"
             class="card-link text-decoration-none text-danger"

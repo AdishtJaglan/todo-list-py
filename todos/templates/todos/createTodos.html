@@ -66,9 +66,11 @@
         <div class="form-group p-1">
           {{ form.priority.label_tag }} {{ form.priority }}
         </div>
-        <div class="form-group p-1">
+        <div class="form-group mb-3 p-1">
           {{ form.dueDate.label_tag }} {{ form.dueDate }}
         </div>
+        <div class="input-group mb-3 p-1">{{ form.file }}</div>
+        <div class="input-group mb-3 p-1">{{ form.image }}</div>
         <button type="submit" class="btn btn-primary mt-3">Submit</button>
       </form>
     </div>
