@@ -35,30 +35,11 @@
           </ul>
 
           <div class="navbar-nav p-1">
-            <li class="nav-item dropdown w-100 p-1">
-              <a
-                class="nav-link active dropdown-toggle d-flex justify-content-between align-items-center row-reverse"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <p class="m-3">Hello, Adisht!</p>
-                <img
-                  src="../static/todos/images/icons8-customer-50.png"
-                  alt=""
-                  class="img-fluid w-50"
-                />
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">details</a></li>
-                <li>
-                  <a class="dropdown-item" href="{% url 'registerUser' %}"
-                    >logout</a
-                  >
-                </li>
-              </ul>
-            </li>
+            <a
+              class="nav-link active fs-5 fw-normal"
+              href="{% url 'loginUser' %}"
+              >Login</a
+            >
           </div>
         </div>
       </div>
