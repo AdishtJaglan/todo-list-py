@@ -14,4 +14,5 @@ urlpatterns = [
     path("delete/<int:pk>", views.deleteOne, name="deleteOne"),
     path("reset_password/", views.resetPassword, name="resetPassword"),
     path("change_password/", views.changePassword, name="changePassword"),
+    path("user_detail/<int:pk>", views.viewUserDetail, name="viewUserDetail"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

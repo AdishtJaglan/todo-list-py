@@ -169,3 +169,13 @@ def changePassword(request):
     else:
         form = PasswordChangeForm()
     return render(request, "todos/changePassword.html", {"form": form})
+
+
+@login_required
+def viewUserDetail(request, pk):
+    try:
+        user = get_object_or_404(User, id=pk)
+    except User.DoesNotExist:
+        messages.error(request, "User does not exist")
+        return redirect("registerUser")
+    return render(request, "todos/viewUserDetail.html", {"user": user})
