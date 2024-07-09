@@ -12,6 +12,7 @@
     />
   </head>
   <body>
+    {%load static%}
     <nav class="navbar navbar-expand-lg bg-dark p-3" data-bs-theme="dark">
       <div class="container-fluid">
         <a class="navbar-brand fs-2 fw-bold" href="{% url 'viewAll' %}">ToDo</a>
@@ -45,7 +46,7 @@
               >
                 <p class="m-3">Hello, {{username}}!</p>
                 <img
-                  src="../static/todos/images/icons8-customer-50.png"
+                  src="{%static 'icons8-customer-50.png'%}"
                   alt=""
                   class="img-fluid w-50"
                 />
